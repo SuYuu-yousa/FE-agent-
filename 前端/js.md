@@ -1,6 +1,26 @@
 # JavaScript 基础知识简明指南
 
 ## 核心概念
+从语言构成的角度，JavaScript的基本构造包括：
+
+1. 原始值（上述7种类型）。
+2. 对象（普通对象、数组、函数、正则、日期、错误、Map、Set 等内置对象，以及自定义对象）。
+3. 操作符（如 +、-、typeof、instanceof、new 等）。
+4. 语句（if、for、while、return、try 等）。
+5. 表达式（字面量、标识符、函数调用等）。
+6. 声明（变量声明 var/let/const，函数声明 function，类声明 class，模块导入 import 等）。
+
+
+## 原型与原型链
+
+js里的“数据”，除了基本类型，都是“对象”
+
+对象是什么概念呢?就是object这个东西的派生，他们都通过原型连接到object上
+
+function也是一类object，也就是说函数本体也是一个对象，这个本体的原型也是对象(Function.proto=object.prototype)
+
+大多数自定义的结构是function
+
 
 ### 1. 变量与数据类型
 ```javascript
@@ -158,5 +178,7 @@ Promise：
 
 
 ## 异步专栏
+
+
 
 
