@@ -24,7 +24,10 @@ object.proto = null )
 
 大多数自定义的结构是function foo实际上就做了把Function这个类型实例化一个foo
 
-prototype是什么？是一个map，你可以往里面加你想给这个函数实例用的东西，prototype的proto是这个prototype所属构造函数的原型的prototype
+prototype是什么？是一个map，你可以往里面加你想给这个函数实例用的东西，prototype的proto，默认是object.prototype，但如果有继承关系，要改为是这个prototype所属构造函数的父函数的prototype
+
+是的，你完全说对了！在ES5及更早的版本中，要实现继承确实需要手动修改原型链，过程比较繁琐且容易出错。不过，从ES6开始，JavaScript提供了更优雅的语法——class 和 extends 关键字，让继承的实现变得像传统面向对象语言一样直观。
+
 
 
 ### 1. 变量与数据类型
