@@ -15,11 +15,15 @@
 
 js里的“数据”，除了基本类型，都是“对象”
 
-对象是什么概念呢?就是object这个东西的派生，他们都通过原型连接到object上
+对象是什么概念呢?就是object这个东西的派生，他们都通过原型proto链连接到object上
+
+proto是什么?他的值等于：构造该对象的构造函数的prototype属性
 
 function也是一类object，也就是说函数本体也是一个对象，这个本体的原型也是对象(Function.proto=object.prototype)
 
-大多数自定义的结构是function
+大多数自定义的结构是function foo实际上就做了把Function这个类型实例化一个foo
+
+function被
 
 
 ### 1. 变量与数据类型
