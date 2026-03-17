@@ -25,7 +25,49 @@ object.proto = null )
 大多数自定义的结构是function foo实际上就做了把Function这个类型实例化一个foo
 
 prototype是什么？是一个map，你可以往里面加你想给这个函数实例用的东西，prototype的proto，默认是object.prototype，但如果有继承关系，要改为是这个prototype所属构造函数的父函数的prototype
+```javascript
 
+// 1. 定义 Creature 构造函数（基类）
+function Creature(name) {
+  this.name = name; // 实例属性：名字
+}
+// 在 Creature.prototype 上添加共享方法
+Creature.prototype.breathe = function() {
+  console.log(`${this.name} is breathing.`);
+};
+
+// 2. 定义 Animal 构造函数（继承 Creature）
+function Animal(name, legs) {
+  // 借用构造函数继承属性
+  Creature.call(this, name);
+  this.legs = legs; // 实例属性：腿的数量
+}
+// 设置 Animal.prototype 继承 Creature.prototype
+Animal.prototype = Object.create(Creature.prototype);
+// 修复 constructor 指向，确保一致性
+Animal.prototype.constructor = Animal;
+// 在 Animal.prototype 上添加共享方法
+Animal.prototype.walk = function() {
+  console.log(`${this.name} is walking with ${this.legs} legs.`);
+};
+
+// 3. 定义 Dog 构造函数（继承 Animal）
+function Dog(name, legs, breed) {
+  Animal.call(this, name, legs); // 继承 Animal 的属性
+  this.breed = breed; // 实例属性：品种
+}
+// 设置 Dog.prototype 继承 Animal.prototype
+Dog.prototype = Object.create(Animal.prototype);
+Dog.prototype.constructor = Dog;
+// 在 Dog.prototype 上添加共享方法
+Dog.prototype.bark = function() {
+  console.log(`${this.name} is barking.`);
+};
+
+// 4. 创建一个 Dog 实例
+const d = new Dog('Rex', 4, 'Labrador');
+```
+```
 是的，你完全说对了！在ES5及更早的版本中，要实现继承确实需要手动修改原型链，过程比较繁琐且容易出错。不过，从ES6开始，JavaScript提供了更优雅的语法——class 和 extends 关键字，让继承的实现变得像传统面向对象语言一样直观。
 
 
