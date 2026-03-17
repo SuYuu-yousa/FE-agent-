@@ -17,7 +17,7 @@ js里的“数据”，除了基本类型，都是“对象”
 
 对象是什么概念呢?就是object这个东西的派生，他们都通过原型proto链连接到object上
 
-proto是什么?他的值等于：构造该对象的构造函数的prototype属性
+proto是什么?他的值等于：构造该对象的构造函数的prototype属性。所有对象都有proto，说明什么?所有对象都是或间接是某个“构造函数”
 
 function也是一类object，也就是说函数本体也是一个对象，这个本体的原型也是对象(Function.proto=object.prototype)
 
