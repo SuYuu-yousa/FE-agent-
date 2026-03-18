@@ -1,6 +1,34 @@
 # JavaScript 基础知识简明指南
 
 ## 核心概念
+从语言构成的角度，JavaScript的基本构造包括：
+
+1. 原始值（上述7种类型）。
+2. 对象（普通对象、数组、函数、正则、日期、错误、Map、Set 等内置对象，以及自定义对象）。
+3. 操作符（如 +、-、typeof、instanceof、new 等）。
+4. 语句（if、for、while、return、try 等）。
+5. 表达式（字面量、标识符、函数调用等）。
+6. 声明（变量声明 var/let/const，函数声明 function，类声明 class，模块导入 import 等）。
+
+
+## 原型与原型链
+
+js里的“数据”，除了基本类型，都是“对象”
+
+对象是什么概念呢?就是object这个东西的派生，他们都通过原型proto链连接到object上
+
+proto是什么?他的值等于：构造该对象的构造函数的prototype属性。所有对象都有proto，说明什么?所有对象都是或间接是某个“构造函数”创造的(除了object花活做出来的proto是null)
+
+function也是一类object，也就是说函数本体也是一个对象，这个本体的原型也是对象(Function.proto=object.prototype
+object.proto = null )
+
+大多数自定义的结构是function foo实际上就做了把Function这个类型实例化一个foo
+
+prototype是什么？是一个map，你可以往里面加你想给这个函数实例用的东西，prototype的proto，默认是object.prototype，但如果有继承关系，要改为是这个prototype所属构造函数的父函数的prototype
+
+是的，你完全说对了！在ES5及更早的版本中，要实现继承确实需要手动修改原型链，过程比较繁琐且容易出错。不过，从ES6开始，JavaScript提供了更优雅的语法——class 和 extends 关键字，让继承的实现变得像传统面向对象语言一样直观。
+
+
 
 ### 1. 变量与数据类型
 ```javascript
@@ -158,5 +186,7 @@ Promise：
 
 
 ## 异步专栏
+
+
 
 
