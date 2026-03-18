@@ -57,7 +57,15 @@ QUIC 基于 UDP，自己实现了：
 | DELETE  | 删除            | ✅   |                      |
 | OPTIONS | 预检请求          | ✅   | CORS 预检              |
 | HEAD    | 同 GET 但无 body | ✅   |                      |
-
+```
+GET     拿数据        （我要看）
+POST    提交数据       （我要创建）
+PUT     整体替换       （我要全量覆盖）
+PATCH   部分修改       （我只改几个字段）
+DELETE  删除          （我要删掉）
+OPTIONS 问服务器你支持啥（CORS 预检用）
+HEAD    和GET一样但只要响应头（探测资源是否存在/大小）
+```
 
 ## GET vs POST 核心区别
 
