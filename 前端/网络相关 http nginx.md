@@ -1,5 +1,7 @@
 
-# 协议
+
+# HTTP
+
 ## HTTP 版本演进
 
 |版本|核心特性|关键问题|
@@ -79,7 +81,9 @@ POST: 参数在body / 不可缓存 / 非幂等 / 回退会重新提交
 本质: 语义不同，TCP层面没有区别
 ```
 
----
+
+
+
 
 ## 状态码
 
@@ -138,4 +142,204 @@ POST: 参数在body / 不可缓存 / 非幂等 / 回退会重新提交
 
 ---
 
-## TCP vs UDP
+# TCP vs UDP
+
+**HTTP Headers 是总称，请求头只是其中一种，另一种是响应头。**
+
+
+
+# 请求
+
+------
+
+## 什么是一次 HTTP 请求？
+
+可以理解成：
+
+```
+浏览器/前端 -> 向服务器发一条消息
+告诉它：
+1. 我要访问哪个地址
+2. 我想干什么（方法）
+3. 我带了什么信息（请求头、请求体）
+```
+
+服务器收到后，再回一条响应。
+
+## 一个请求由什么组成？
+
+### 1. 请求行
+
+```
+GET /users/1 HTTP/1.1
+```
+
+表示：方法：GET  路径：/users/1  协议版本：HTTP/1.1
+
+------
+
+### 2. 请求头 Headers
+
+是一些“附加说明信息”。
+
+比如：
+
+```
+Host: api.xxx.com
+Content-Type: application/json
+Authorization: Bearer xxx
+Accept: application/json
+Cookie: a=1; b=2
+```
+
+作用是告诉服务器：
+
+- 我要发给谁
+- 我传的数据是什么格式
+- 我希望你返回什么格式
+- 我的身份凭证是什么
+- 我带了哪些 cookie
+
+------
+
+### 3. 请求体 Body
+
+真正提交的数据，常见于 POST / PUT / PATCH。（所以get一般没有请求体）
+
+```
+{
+  "name": "Tom",
+  "age": 18
+}
+```
+
+
+
+## 常见请求头
+
+# 响应
+
+### 1. 状态行
+
+表示这次请求处理结果怎么样。
+
+```
+HTTP/1.1 200 OK
+```
+
+这里最重要的是状态码：
+
+- `200` 成功
+- `404` 资源不存在
+- `500` 服务器错误
+
+------
+
+### 2. 响应头
+
+告诉浏览器一些附加信息。
+
+比如：
+
+- 返回内容是什么类型
+- 能不能缓存
+- 要不要设置 cookie
+- 是否允许跨域
+
+------
+
+### 3. 响应体
+
+真正返回的数据内容。
+
+比如可能是：
+
+- HTML 页面
+- JSON 数据
+- 图片
+- 文件
+
+例如：
+
+JSON
+
+
+
+```
+{
+  "code": 0,
+  "data": { "name": "Tom" }
+}
+```
+
+
+
+
+
+# 域和跨域
+
+跨域：跨的是什么？
+**跨域 = 跨源**。
+当前页面的源 和 请求目标的源 不一致。
+
+**源 = 协议 + 域名 + 端口**
+任意一个不同，就是跨源。
+
+
+
+为什么会跨域？因为浏览器有**同源策略**，防止恶意网站读取别的网站的数据。
+
+- 请求**能发出去**
+
+- 但浏览器**不让前端读响应**
+
+  
+
+  ### CORS
+
+  最重要、最常用。
+  后端通过响应头告诉浏览器：这个跨域请求允许。
+
+  常见头：
+
+  - `Access-Control-Allow-Origin`
+  - `Access-Control-Allow-Methods`
+  - `Access-Control-Allow-Headers`
+  - `Access-Control-Allow-Credentials`
+
+  ------
+
+  ### 预检请求 OPTIONS
+
+  非简单请求会先发 OPTIONS。
+
+  常见触发：
+
+  - `PUT / DELETE / PATCH`
+  - `Content-Type: application/json`
+  - 自定义请求头，如 `Authorization`
+
+  ------
+
+  ### Cookie 跨域
+
+  跨域默认不带 cookie。
+
+  要带的话：
+
+  - 前端：`withCredentials: true` / `credentials: 'include'`
+  - 后端：`Access-Control-Allow-Credentials: true`
+  - 且 `Access-Control-Allow-Origin` 不能是 `*`
+
+  ------
+
+  ### 代理
+
+  实际开发最常见。
+
+  - 开发环境：Vite / Webpack proxy
+  - 生产环境：Nginx 反向代理
+
+  本质：让浏览器看起来是同源请求。
+
+# 网关？
