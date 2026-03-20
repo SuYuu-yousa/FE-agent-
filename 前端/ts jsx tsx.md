@@ -1,3 +1,4 @@
+# TS
 ## 核心区别对比
 
 |特性|JavaScript|TypeScript|
@@ -218,4 +219,18 @@ type RoleMap = Record<string, string[]>;
 
 > **重点理解**：TS 的类型信息在编译后**完全擦除**，运行时和普通 JS 没有区别。
 
----
+### TS React 项目（主流做法）
+
+- 逻辑工具代码：`utils.ts`
+- React 组件：`App.tsx`, `Button.tsx`
+
+这样区分有几个好处：
+
+- `.tsx`：一眼看出这是个**组件/含 JSX 的文件**
+- `.ts`：一眼看出这是**纯逻辑/类型定义**文件
+
+
+# JSX
+
+
+# TSX
