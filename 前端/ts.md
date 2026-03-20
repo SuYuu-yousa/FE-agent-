@@ -70,6 +70,7 @@ greet({ name: "Tom" });
 
 ### 4. 泛型（Generics）
 
+
 ```
 // 不用泛型 —— 要么丢失类型，要么写多个函数
 function identity(arg: any): any {
@@ -85,6 +86,37 @@ let output1 = identity<string>("hello");  // 类型是 string
 let output2 = identity<number>(42);       // 类型是 number
 let output3 = identity("hello");          // 自动推断为 string
 ```
+## 泛型用在接口/类型上
+
+```
+// 一个通用的 API 响应格式
+interface ApiResponse<T> {
+  code: number;
+  message: string;
+  data: T;          // data 的类型是灵活的
+}
+
+// 用户接口返回
+const res1: ApiResponse<string> = {
+  code: 200,
+  message: "ok",
+  data: "hello"       // data 是 string
+};
+
+// 用户列表接口返回
+interface User { id: number; name: string; }
+
+const res2: ApiResponse<User[]> = {
+  code: 200,
+  message: "ok",
+  data: [              // data 是 User[]
+    { id: 1, name: "Tom" },
+    { id: 2, name: "Jerry" }
+  ]
+};
+```
+
+
 
 ### 5. 枚举（Enum）
 ```
@@ -125,7 +157,6 @@ type Person = HasName & HasAge;
 
 ### 7. 类型别名（Type Alias）
 
-TypeScript
 
 ```
 type ID = string | number;
@@ -134,8 +165,6 @@ type Callback = (data: string) => void;
 ```
 
 ### 8. 类型推断 & 类型守卫
-
-TypeScript
 
 ```
 // 类型推断：TS 自动推断类型，不必处处写注解
@@ -153,8 +182,6 @@ function printId(id: string | number) {
 ```
 
 ### 9. 高级类型工具（Utility Types）
-
-TypeScript
 
 ```
 interface User {
@@ -176,11 +203,8 @@ type UserWithoutEmail = Omit<User, "email">;
 type RoleMap = Record<string, string[]>;
 ```
 
----
-
 ## 编译流程
 
-text
 
 ```
   .ts 文件
