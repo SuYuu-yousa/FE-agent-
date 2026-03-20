@@ -56,6 +56,7 @@ interface User {
   readonly email: string; // 只读属性
 }
 
+//函数后面加个冒号说明返回类型，可以不写，自动推断，可以void 
 function greet(user: User): string {
   return `Hello, ${user.name}`;
 }
@@ -68,8 +69,6 @@ greet({ name: "Tom" });
 ```
 
 ### 4. 泛型（Generics）
-
-TypeScript
 
 ```
 // 不用泛型 —— 要么丢失类型，要么写多个函数
@@ -88,9 +87,6 @@ let output3 = identity("hello");          // 自动推断为 string
 ```
 
 ### 5. 枚举（Enum）
-
-TypeScript
-
 ```
 enum Direction {
   Up,      // 0
