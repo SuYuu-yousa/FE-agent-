@@ -231,6 +231,10 @@ type RoleMap = Record<string, string[]>;
 
 
 # JSX
+JSX 是：
 
+> ✅ 一种 JS 的语法扩展  
+> ✅ 允许你在 JS 里写类似 HTML 的结构  
+> ✅ 最终会被编译成 `React.createElement(...)`
 
 # TSX
