@@ -4,7 +4,7 @@ Pnpm install做了什么
 
 比如说
 
-：Progress: resolved 1256, reused 1163, downloaded 0, added 0
+Progress: resolved 1256, reused 1163, downloaded 0, added 0
 
 所以 node_modules 是给 Node.js 用的查找路径，不是真正存储包的地方。
 
@@ -75,9 +75,7 @@ side-effects-cache=false
 
 # 八股问题
 
-重排与重绘： 
 
-重排（Reflow）是重新计算页面布局（几何属性变化），而重绘（Repaint）是重新绘制外观（如颜色、背景），不改变布局。 重排一定会导致重绘，但重绘不一定需要重排。
 
 js事件流
 
