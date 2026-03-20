@@ -377,7 +377,6 @@ const Counter = (props) => {
 
 也就是说：
 
-TypeScript
 
 ```
 React.FC<CounterProps>
@@ -388,8 +387,6 @@ React.FC<CounterProps>
 > “这是一个 React 函数组件，它接收 `CounterProps` 这样的 props。”
 
 如果你不写这部分，也能工作：
-
-React
 
 ```
 const Counter = ({ initialValue = 0 }: CounterProps) => { ... }
@@ -409,7 +406,6 @@ const Counter = ({ initialValue = 0 }: CounterProps) => { ... }
 
 等价于（用普通写法的话）：
 
-React
 
 ```
 const Counter: React.FC<CounterProps> = (props) => {
@@ -425,8 +421,6 @@ const Counter: React.FC<CounterProps> = (props) => {
 
 `CounterProps` 在前面（假设）是这样定义的：
 
-TypeScript
-
 ```
 interface CounterProps {
   initialValue?: number; // 可选属性
@@ -437,7 +431,6 @@ interface CounterProps {
 
 ## 2. 这一行：`useState<number>`
 
-React
 
 ```
 const [count, setCount] = useState<number>(initialValue);
@@ -452,8 +445,6 @@ const [count, setCount] = useState<number>(initialValue);
 
 不考虑 TS 的话，典型写法：
 
-React
-
 ```
 const [count, setCount] = useState(0);
 ```
@@ -461,8 +452,6 @@ const [count, setCount] = useState(0);
 ---
 
 ### 2.2 `<number>`（TS：泛型参数）
-
-TypeScript
 
 ```
 useState<number>(initialValue)
@@ -476,8 +465,6 @@ useState<number>(initialValue)
     - `setCount` 是一个接收 `number` 的函数
 
 等价于：
-
-TypeScript
 
 ```
 const [count, setCount] = useState<number>(initialValue);
@@ -499,16 +486,12 @@ const [count, setCount] = useState(initialValue); // 也能推断为 number
 
 `useState` 返回的是一个**长度为 2 的数组**：
 
-TypeScript
-
 ```
 const result = useState<number>(initialValue);
 // result 形如：[当前值, 修改当前值的函数]
 ```
 
 用数组解构写成：
-
-TypeScript
 
 ```
 const [count, setCount] = useState<number>(initialValue);
@@ -519,8 +502,6 @@ const [count, setCount] = useState<number>(initialValue);
 
 例如：
 
-TypeScript
-
 ```
 setCount(10);   // 把 count 改为 10
 setCount(count + 1); // 在原基础上 +1
@@ -530,7 +511,6 @@ setCount(count + 1); // 在原基础上 +1
 
 ## 3. 点击处理函数 `handleClick`
 
-React
 
 ```
 const handleClick = () => {
