@@ -238,3 +238,72 @@ JSX 是：
 > ✅ 最终会被编译成 `React.createElement(...)`
 
 # TSX
+
+## 三、结合 React 基础举一个完整 TSX 例子
+
+假设我们做一个简单的 React + TS 计数器组件：`Counter.tsx`
+
+
+```
+// Counter.tsx
+import React, { useState } from "react";
+
+// 1. 定义 props 的类型
+interface CounterProps {
+  initialValue?: number; // 可选
+}
+
+// 2. 函数组件：使用 TSX + 类型标注
+const Counter: React.FC<CounterProps> = ({ initialValue = 0 }) => {
+  // useState<number> 表示 count 是 number 类型
+  const [count, setCount] = useState<number>(initialValue);
+
+  const handleClick = () => {
+    setCount(count + 1);
+  };
+
+  // 3. return 的是 JSX
+  return (
+    <div>
+      <p>当前计数：{count}</p>
+      <button onClick={handleClick}>+1</button>
+    </div>
+  );
+};
+
+export default Counter;
+```
+
+### 对比一下如果是 JS + JSX（无 TS）
+
+React
+
+```
+// Counter.jsx
+import React, { useState } from "react";
+
+const Counter = ({ initialValue = 0 }) => {
+  const [count, setCount] = useState(initialValue); // 类型随便，可能被传错
+
+  const handleClick = () => {
+    setCount(count + 1);
+  };
+
+  return (
+    <div>
+      <p>当前计数：{count}</p>
+      <button onClick={handleClick}>+1</button>
+    </div>
+  );
+};
+
+export default Counter;
+```
+
+差异：
+
+- `.tsx` 版本里：
+    - `CounterProps` 明确了 `initialValue` 是 `number | undefined`
+    - 如果你在别处写 `<Counter initialValue="abc" />`，TS 会直接报错
+- `.jsx` 版本里：
+    - 你写 `<Counter initialValue="abc" />`，不会有编译错误，运行时可能表现异常
