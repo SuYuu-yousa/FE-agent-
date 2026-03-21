@@ -845,41 +845,6 @@ ChatGPT 等 LLM 的流式输出就是用 SSE 实现的
 
 ### 结构化数据（JSON-LD）
 
-```
-<!-- 告诉搜索引擎页面内容的结构化信息 -->
-<!-- Google 会用这些数据生成富媒体搜索结果（Rich Snippets） -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": "前端面试题大全",
-  "author": {
-    "@type": "Person",
-    "name": "张三"
-  },
-  "datePublished": "2024-01-15",
-  "dateModified": "2024-06-01",
-  "image": "https://example.com/cover.jpg",
-  "publisher": {
-    "@type": "Organization",
-    "name": "TechBlog",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://example.com/logo.png"
-    }
-  },
-  "description": "全面整理前端面试高频考点..."
-}
-</script>
-
-<!-- 其他常用类型 -->
-<!-- @type: "Product"       → 商品（价格、评分、库存） -->
-<!-- @type: "BreadcrumbList" → 面包屑导航 -->
-<!-- @type: "FAQ"           → 常见问题 -->
-<!-- @type: "HowTo"         → 教程步骤 -->
-<!-- @type: "Recipe"        → 食谱 -->
-```
-
 ### Open Graph（社交分享）
 
 ```
@@ -922,8 +887,6 @@ ChatGPT 等 LLM 的流式输出就是用 SSE 实现的
 ## 五、无障碍（Accessibility / a11y）
 
 ### ARIA 属性
-
-
 
 ```
 <!-- ARIA = Accessible Rich Internet Applications -->
@@ -974,10 +937,6 @@ ChatGPT 等 LLM 的流式输出就是用 SSE 实现的
 
 ### role（角色）
 
-HTML
-
-
-
 ```
 <!-- 常用 role 值 -->
 <!--
@@ -1005,10 +964,6 @@ HTML
 
 ### tabindex（键盘导航）
 
-HTML
-
-
-
 ```
 <!-- tabindex 控制元素是否可聚焦以及 Tab 键的导航顺序 -->
 
@@ -1026,10 +981,6 @@ HTML
 <input tabindex="2">  <!-- 不要这样做 -->
 <input tabindex="1">  <!-- 不要这样做 -->
 ```
-
-text
-
-
 
 ```
 键盘可访问性清单：
@@ -1062,10 +1013,6 @@ dialog.addEventListener('keydown', (e) => {
 ## 六、DOM 与 BOM
 
 ### 6.1 DOM 树构建过程 ⭐⭐
-
-text
-
-
 
 ```
 浏览器从拿到 HTML 到渲染出页面的完整流程：
