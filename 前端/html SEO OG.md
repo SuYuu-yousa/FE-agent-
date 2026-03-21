@@ -327,10 +327,6 @@ SLOT**组件内部先留个坑，外部使用组件时把内容塞进去。**
 
 #### Canvas（位图，像素级操作）
 
-JavaScript
-
-
-
 ```
 const canvas = document.getElementById('myCanvas');
 const ctx = canvas.getContext('2d');  // 获取 2D 渲染上下文
@@ -367,10 +363,6 @@ img.src = 'photo.jpg';
 
 #### SVG（矢量图，XML 描述）
 
-HTML
-
-
-
 ```
 <svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
   <!-- 矩形 -->
@@ -394,10 +386,6 @@ HTML
 </svg>
 ```
 
-text
-
-
-
 ```
 Canvas vs SVG 对比：
 ┌───────────┬────────────────────┬────────────────────┐
@@ -418,18 +406,10 @@ Canvas vs SVG 对比：
 
 ### 3.3 Drag & Drop API
 
-HTML
-
-
-
 ```
 <div id="dragItem" draggable="true">拖我</div>
 <div id="dropZone">放到这里</div>
 ```
-
-JavaScript
-
-
 
 ```
 const dragItem = document.getElementById('dragItem');
@@ -471,10 +451,6 @@ dropZone.addEventListener('drop', (e) => {
   dropZone.classList.remove('drag-over');
 });
 ```
-
-text
-
-
 
 ```
 事件触发顺序：
@@ -1853,7 +1829,7 @@ BOM 面试高频点：
 
 ------
 
-## 📌 校招中 HTML 常考的重点
+## 七、📌 校招中 HTML 常考的重点
 
 
 
