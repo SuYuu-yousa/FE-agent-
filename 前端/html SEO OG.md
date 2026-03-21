@@ -177,19 +177,6 @@ class MyButton extends HTMLElement {
       }));
     });
   }
-
-  // 监听哪些属性的变化
-  static get observedAttributes() {
-    return ['label', 'disabled'];
-  }
-
-  // 当被监听的属性变化时调用
-  attributeChangedCallback(name, oldVal, newVal) {
-    if (name === 'label' && this.querySelector('button')) {
-      this.querySelector('button').textContent = newVal;
-    }
-  }
-
   // 元素从 DOM 中移除时调用
   disconnectedCallback() {
     console.log('元素被移除');
@@ -200,18 +187,10 @@ class MyButton extends HTMLElement {
 customElements.define('my-button', MyButton);
 ```
 
-HTML
-
-
-
 ```
 <!-- 使用自定义元素 -->
 <my-button label="点击我"></my-button>
 ```
-
-text
-
-
 
 ```
 生命周期：
@@ -223,10 +202,6 @@ adoptedCallback()       → 被移动到新文档时（少用）
 ```
 
 #### Shadow DOM（影子 DOM）
-
-JavaScript
-
-
 
 ```
 class MyCard extends HTMLElement {
