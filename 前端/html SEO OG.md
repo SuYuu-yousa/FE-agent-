@@ -56,7 +56,7 @@ HTML
 
 ## 二、meta 标签
 
-### meta **提供关于 HTML 文档的元数据**
+### meta :**提供关于 HTML 文档的元数据**
 
 ### viewport（移动端适配基础）
 
