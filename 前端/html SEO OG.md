@@ -3,6 +3,27 @@
 ## 🎯 校招复习建议
 
 ```
+
+HTML
+├── 语义化标签（article/section/nav/aside/header/footer）
+├── meta 标签作用（viewport/charset/http-equiv/CSP）
+├── HTML5 新特性
+│   ├── Web Components（Shadow DOM/Custom Elements/Template/Slot）
+│   ├── Canvas / SVG 基础
+│   ├── Drag & Drop API
+│   ├── Web Storage（localStorage/sessionStorage）
+│   ├── History API（pushState/replaceState）
+│   ├── Geolocation / Web Worker / Service Worker
+│   └── WebSocket / Server-Sent Events
+├── SEO 基础（TDK/结构化数据/Open Graph）
+├── 无障碍（ARIA 属性 / role / tabindex）
+└── DOM 与 BOM
+    ├── DOM 树构建过程
+    ├── DOM API（增删改查/遍历/片段DocumentFragment）
+    ├── MutationObserver
+    ├── IntersectionObserver
+    ├── ResizeObserver
+    └── BOM（window/location/navigator/history/screen）
 重要程度排序：
 
 🔴 必须掌握：语义化、行内/块级、async/defer、meta viewport、本地存储区别
