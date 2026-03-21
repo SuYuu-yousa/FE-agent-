@@ -83,15 +83,9 @@ HTML
 <meta charset="UTF-8">
 ```
 
-```
-为什么必须写：
-- 告诉浏览器用什么编码解析文档
-- 不写或写错 → 中文乱码
-- UTF-8 是万国码，覆盖几乎所有语言
-- 必须放在 <head> 最前面（前 1024 字节内）
-```
+### ==http-equiv（模拟 HTTP 响应头）==
 
-### http-equiv（模拟 HTTP 响应头）
+**配不了后端/服务器响应头时，用 `meta http-equiv` 在前端页面里兜底声明一些规则**。但能力和生效时机都不如真正响应头。
 
 ```
 <!-- 页面自动刷新/跳转 -->
@@ -108,7 +102,7 @@ HTML
 <meta http-equiv="Pragma" content="no-cache">
 ```
 
-### CSP（Content-Security-Policy）⭐⭐
+### ==CSP（Content-Security-Policy）⭐⭐==
 
 ```
 <meta http-equiv="Content-Security-Policy" 
@@ -169,10 +163,6 @@ https://xxx.com → 指定域名
 Web Components 是浏览器原生的**组件化方案**，不依赖任何框架。
 
 #### Custom Elements（自定义元素）
-
-JavaScript
-
-
 
 ```
 // 定义自定义元素
