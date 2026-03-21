@@ -54,26 +54,16 @@ HTML
 
 
 
-## 二、meta 标签作用
+## 二、meta 标签
 
-### meta 标签的本质
+### meta **提供关于 HTML 文档的元数据**
 
-**提供关于 HTML 文档的元数据**——不会显示在页面上，但对浏览器、搜索引擎、社交平台至关重要。
-
-### viewport（移动端适配核心）
-
-HTML
-
-
+### viewport（移动端适配基础）
 
 ```
 <meta name="viewport" content="width=device-width, initial-scale=1.0, 
   maximum-scale=1.0, user-scalable=no">
 ```
-
-text
-
-
 
 ```
 各属性含义：
@@ -84,26 +74,14 @@ text
 │ minimum-scale    │ 最小缩放比例                    │
 │ user-scalable    │ 是否允许用户手动缩放（no/yes）    │
 └──────────────────┴───────────────────────────────┘
-
-不设 viewport 的后果：
-→ 移动端浏览器默认视口宽度 980px
-→ 页面被缩小显示，文字极小
-→ 布局完全不适配
+//核心是width=divice-width （window.innerWidth 会随 viewport 设置而变化）设定了window元素的款是设备宽
 ```
 
 ### charset（字符编码）
 
-HTML
-
-
-
 ```
 <meta charset="UTF-8">
 ```
-
-text
-
-
 
 ```
 为什么必须写：
@@ -114,10 +92,6 @@ text
 ```
 
 ### http-equiv（模拟 HTTP 响应头）
-
-HTML
-
-
 
 ```
 <!-- 页面自动刷新/跳转 -->
@@ -136,20 +110,12 @@ HTML
 
 ### CSP（Content-Security-Policy）⭐⭐
 
-HTML
-
-
-
 ```
 <meta http-equiv="Content-Security-Policy" 
   content="default-src 'self'; script-src 'self' https://cdn.example.com; 
            style-src 'self' 'unsafe-inline'; img-src *; 
            connect-src 'self' https://api.example.com">
 ```
-
-text
-
-
 
 ```
 CSP 是什么：内容安全策略，防止 XSS 攻击的重要手段
@@ -177,10 +143,6 @@ https://xxx.com → 指定域名
 ```
 
 ### 其他常用 meta
-
-HTML
-
-
 
 ```
 <!-- SEO 相关 -->
