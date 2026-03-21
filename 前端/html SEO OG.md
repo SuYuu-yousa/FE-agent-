@@ -494,10 +494,6 @@ class Router {
 
 #### Geolocation（地理定位）
 
-JavaScript
-
-
-
 ```
 // 获取一次位置
 navigator.geolocation.getCurrentPosition(
@@ -589,10 +585,6 @@ Worker 的种类：
 ```
 
 #### Service Worker（离线缓存、PWA 核心）⭐
-
-JavaScript
-
-
 
 ```
 // ===== 注册 Service Worker（主线程）=====
