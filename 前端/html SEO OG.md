@@ -104,6 +104,8 @@ HTML
 
 ### ==CSP（Content-Security-Policy）⭐⭐==
 
+==CSP 是什么：内容安全策略，防止 XSS 攻击的重要手段==
+
 ```
 <meta http-equiv="Content-Security-Policy" 
   content="default-src 'self'; script-src 'self' https://cdn.example.com; 
@@ -112,8 +114,6 @@ HTML
 ```
 
 ```
-CSP 是什么：内容安全策略，防止 XSS 攻击的重要手段
-
 核心指令：
 ┌─────────────┬─────────────────────────────────┐
 │ default-src  │ 默认策略，其他指令的回退值         │
@@ -295,9 +295,7 @@ SLOT**组件内部先留个坑，外部使用组件时把内容塞进去。**
 ```
 
 ```
-<my-box>
-  <span>这是外面传进来的内容</span>
-</my-box>
+
 
 <script>
   class MyBox extends HTMLElement {
@@ -314,16 +312,14 @@ SLOT**组件内部先留个坑，外部使用组件时把内容塞进去。**
   }
   customElements.define('my-box', MyBox);
 </script>
+
+使用时：
+<my-box>
+  <span>这是外面传进来的内容</span>
+</my-box>
 ```
 
-```
-三大技术的关系：
-Custom Elements → 定义新标签（行为）
-Shadow DOM      → 封装内部结构和样式（隔离）
-Template/Slot   → 定义可复用的模板和内容分发（结构）
 
-三者结合 = 完整的 Web Components 方案
-```
 
 ------
 
