@@ -1,4 +1,4 @@
-#### Canvas（位图，像素级操作）
+#### Canvas（位图，像素级操作）:有空做个实践
 
 ```
 const canvas = document.getElementById('myCanvas');
