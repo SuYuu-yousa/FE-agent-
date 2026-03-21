@@ -329,52 +329,13 @@ SLOT**组件内部先留个坑，外部使用组件时把内容塞进去。**
 
 
 
+
+
 ### 3.3 Drag & Drop API
 
 ```
 <div id="dragItem" draggable="true">拖我</div>
 <div id="dropZone">放到这里</div>
-```
-
-```
-const dragItem = document.getElementById('dragItem');
-const dropZone = document.getElementById('dropZone');
-
-// ===== 拖拽源的事件 =====
-dragItem.addEventListener('dragstart', (e) => {
-  // 拖拽开始：设置传输数据
-  e.dataTransfer.setData('text/plain', e.target.id);
-  e.dataTransfer.effectAllowed = 'move';  // 允许的效果
-  e.target.style.opacity = '0.5';
-});
-
-dragItem.addEventListener('dragend', (e) => {
-  // 拖拽结束：恢复样式
-  e.target.style.opacity = '1';
-});
-
-// ===== 放置目标的事件 =====
-dropZone.addEventListener('dragover', (e) => {
-  e.preventDefault();  // 必须阻止默认行为才能触发 drop！
-  e.dataTransfer.dropEffect = 'move';
-});
-
-dropZone.addEventListener('dragenter', (e) => {
-  e.preventDefault();
-  dropZone.classList.add('drag-over');  // 拖入时添加高亮
-});
-
-dropZone.addEventListener('dragleave', () => {
-  dropZone.classList.remove('drag-over');  // 拖出时移除高亮
-});
-
-dropZone.addEventListener('drop', (e) => {
-  e.preventDefault();
-  const id = e.dataTransfer.getData('text/plain');
-  const element = document.getElementById(id);
-  dropZone.appendChild(element);  // 移动元素
-  dropZone.classList.remove('drag-over');
-});
 ```
 
 ```
@@ -567,10 +528,6 @@ navigator.geolocation.clearWatch(watchId);  // 停止监听
 ```
 
 #### Web Worker（多线程）⭐
-
-JavaScript
-
-
 
 ```
 // ===== 主线程（main.js）=====
