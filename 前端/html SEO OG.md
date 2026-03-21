@@ -427,8 +427,6 @@ window.addEventListener('storage', (e) => {
 // 注意：storage 事件只在「其他」同源标签页触发，当前页面不触发
 ```
 
-text
-
 
 
 ```
@@ -453,10 +451,6 @@ Cookie → 身份认证（httpOnly）、服务端需要读取的信息
 ------
 
 ### 3.5 History API
-
-JavaScript
-
-
 
 ```
 // ========== pushState（添加新的历史记录） ==========
@@ -493,8 +487,6 @@ history.go(1);        // 前进一步
 console.log(history.length);  // 历史栈的长度
 console.log(history.state);   // 当前的 state
 ```
-
-text
 
 
 
@@ -885,33 +877,24 @@ ChatGPT 等 LLM 的流式输出就是用 SSE 实现的
 
 ------
 
-## 四、SEO 基础
+## 四、SEO 
+
+[现代SEO深度解析：原理、算法与实战 - Chongxiの咖啡屋](https://xice.cx/posts/modernSEO/)
+
+看上面这篇
 
 ### TDK（Title / Description / Keywords）
 
-HTML
-
-
-
 ```
 <!-- Title：最重要的 SEO 标签 -->
-<!-- 建议：核心关键词 - 品牌名，控制在 60 字符内 -->
 <title>前端面试题大全 - 2024最新整理 | TechBlog</title>
-
 <!-- Description：搜索结果中的摘要 -->
-<!-- 建议：包含关键词，150-160 字符，有吸引力 -->
-<meta name="description" content="全面整理2024年前端面试高频考点，
-涵盖HTML、CSS、JavaScript、React、Vue等核心知识点及详解。">
-
+<meta name="description" content="全面整理2024年前端面试高频考点，涵盖HTML、CSS、JavaScript、React、Vue等核心知识点及详解。">
 <!-- Keywords：现在搜索引擎基本忽略，但写上无害 -->
 <meta name="keywords" content="前端面试,JavaScript,React,面试题">
 ```
 
 ### 结构化数据（JSON-LD）
-
-HTML
-
-
 
 ```
 <!-- 告诉搜索引擎页面内容的结构化信息 -->
@@ -950,10 +933,6 @@ HTML
 
 ### Open Graph（社交分享）
 
-HTML
-
-
-
 ```
 <!-- Facebook / 微信 / 钉钉等平台分享时展示的卡片信息 -->
 <meta property="og:title" content="前端面试题大全">
@@ -971,10 +950,6 @@ HTML
 ```
 
 ### 其他 SEO 实践
-
-HTML
-
-
 
 ```
 <!-- 语义化标签（前面已讲） -->
@@ -998,8 +973,6 @@ HTML
 ## 五、无障碍（Accessibility / a11y）
 
 ### ARIA 属性
-
-HTML
 
 
 
