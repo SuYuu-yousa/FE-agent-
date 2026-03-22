@@ -133,7 +133,7 @@ arr.push(4);          // 尾部加
 arr.pop();            // 尾部删
 arr.unshift(0);       // 头部加
 arr.shift();          // 头部删
-arr.slice(1, 3);      // 截取，不改原数组
+arr.slice(1, 3);      // 截取，不改原数组，[a, b, c, d].slice(1, 3) // [b, c]
 arr.splice(1, 1, 9);  // 删除/替换/插入，���原数组
 arr.map(x => x * 2);  // 映射新数组
 arr.filter(x => x > 1); // 过滤
@@ -205,13 +205,6 @@ Math.abs(-10);        // 绝对值
 const json = JSON.stringify({ a: 1 }); // 对象转字符串
 JSON.parse(json);     // 字符串转对象
 
-// Promise
-Promise.resolve(1).then(v => v); // 成功
-Promise.reject('err').catch(e => e); // 失败
-Promise.all([p1, p2]); // 全成功才成功
-Promise.allSettled([p1, p2]); // 都结束
-Promise.race([p1, p2]); // 谁先结束用谁
-
 // 常用语法
 const obj2 = { a: { b: 1 } };
 obj2?.a?.b;           // 可选链，防止报错
@@ -222,8 +215,6 @@ const { a } = obj;    // 解构
 const [x, y] = arr;   // 数组解构
 
 ```
-
-
 
 ### 7. 异步编程基础
 ```javascript
