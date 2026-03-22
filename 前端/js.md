@@ -80,6 +80,11 @@ const result = condition ? value1 : value2;
 for (let i = 0; i < 5; i++) { }
 while (condition) { }
 do { } while (condition);
+
+
+语法	遍历什么
+for...of	遍历 值
+for...in	遍历 键 / 下标 / 属性名
 ```
 
 ### 4. 函数
@@ -186,7 +191,6 @@ Promise：
 
 
 ## 异步专栏
-
 
 
 
