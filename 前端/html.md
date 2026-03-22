@@ -1066,8 +1066,6 @@ dialog.addEventListener('keydown', (e) => {
 └──────────────┴─────────────────────────────────────────┘
 ```
 
-HTML
-
 
 
 ```
@@ -1082,7 +1080,7 @@ HTML
 <!-- 或者把 script 放到 body 末尾 -->
 ```
 
-text
+
 
 
 
@@ -1110,8 +1108,6 @@ text
 
 #### 查询
 
-JavaScript
-
 
 
 ```
@@ -1135,8 +1131,6 @@ const items2 = document.querySelectorAll('.item');
 ```
 
 #### 创建与增删
-
-JavaScript
 
 
 
@@ -1169,8 +1163,6 @@ const clone = element.cloneNode(true);         // true: 深拷贝（含子节点
 
 #### 属性操作
 
-JavaScript
-
 
 
 ```
@@ -1200,8 +1192,6 @@ getComputedStyle(element).color;  // 获取计算后的样式（只读）
 
 #### 遍历
 
-JavaScript
-
 
 
 ```
@@ -1228,8 +1218,6 @@ element.matches('.active');  // true/false
 ```
 
 #### DocumentFragment（文档片段）⭐
-
-JavaScript
 
 
 
@@ -1260,8 +1248,6 @@ ul.appendChild(fragment);  // 一次性插入，只触发一次重排
 ------
 
 ### 6.3 MutationObserver ⭐
-
-JavaScript
 
 
 
@@ -1357,8 +1343,6 @@ observer.unobserve(element);
 observer.disconnect();
 ```
 
-JavaScript
-
 
 
 ```
@@ -1399,7 +1383,7 @@ const trackObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.5 });
 ```
 
-text
+
 
 
 
@@ -1419,10 +1403,6 @@ IntersectionObserver：
 ------
 
 ### 6.5 ResizeObserver
-
-JavaScript
-
-
 
 ```
 // 监听元素尺寸变化（替代 window.resize 的更精细方案）
@@ -1450,7 +1430,7 @@ resizeObserver.unobserve(element);
 resizeObserver.disconnect();
 ```
 
-text
+
 
 
 
@@ -1472,8 +1452,6 @@ vs window.resize：
 ------
 
 ### 6.6 BOM（Browser Object Model）
-
-JavaScript
 
 
 
@@ -1575,8 +1553,6 @@ screen.orientation.addEventListener('change', () => {
 });
 ```
 
-text
-
 
 
 ```
@@ -1602,42 +1578,13 @@ BOM 面试高频点：
 > - **中频考点**：CSP 安全策略、Service Worker 缓存策略、WebSocket 心跳重连、MutationObserver 原理
 > - **加分项**：Web Components（Shadow DOM 样式隔离原理）、无障碍 ARIA、DocumentFragment 性能优化
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 有什么具体的知识点想深入了解的吗？😊**答案是：需要的！** 虽然现在框架（React/Vue）很火，但 HTML 基础在校招面试中仍然会考到，而且是基本功的体现。
 
 ------
 
 ## 七、📌 校招中 HTML 常考的重点
 
-
-
-|      |      |
-| ---- | ---- |
-|      |      |
-|      |      |
-|      |      |
-|      |      |
-|      |      |
-|      |      |
-|      |      |
-|      |      |
-|      |      |
-|      |      |
+## 1.语义化标签
 
 ------
 
