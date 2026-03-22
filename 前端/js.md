@@ -124,15 +124,106 @@ fruits.push("葡萄"); // 添加元素
 fruits.length;      // 数组长度
 ```
 
-### 6. 数组常用方法
-```javascript
-const numbers = [1, 2, 3, 4, 5];
+### 6.常用api
 
-numbers.map(x => x * 2);     // [2,4,6,8,10]
-numbers.filter(x => x > 2);  // [3,4,5]
-numbers.find(x => x > 3);    // 4,找出第一个符合条件的元素，找不到返回undefined
-numbers.includes(3);         // true
 ```
+// Array
+const arr = [1, 2, 3];
+arr.push(4);          // 尾部加
+arr.pop();            // 尾部删
+arr.unshift(0);       // 头部加
+arr.shift();          // 头部删
+arr.slice(1, 3);      // 截取，不改原数组
+arr.splice(1, 1, 9);  // 删除/替换/插入，���原数组
+arr.map(x => x * 2);  // 映射新数组
+arr.filter(x => x > 1); // 过滤
+arr.find(x => x === 2); // 找第一个满足条件的值
+arr.findIndex(x => x === 2); // 找下标
+arr.includes(2);      // 是否包含
+arr.indexOf(2);       // 元素下标
+arr.some(x => x > 2); // 是否至少一个满足
+arr.every(x => x > 0); // 是否全部满足
+arr.reduce((a, b) => a + b, 0); // 累加/聚合
+arr.sort((a, b) => a - b); // 排序
+arr.join('-');        // 转字符串
+arr.flat();           // 拍平一层
+
+// Object
+const obj = { a: 1, b: 2 };
+Object.keys(obj);     // ['a', 'b']
+Object.values(obj);   // [1, 2]
+Object.entries(obj);  // [['a',1], ['b',2]]
+Object.assign({}, obj, { c: 3 }); // 合并对象
+obj.hasOwnProperty('a'); // 是否有自身属性
+
+// String
+const str = ' hello world ';
+str.length;           // 长度
+str.trim();           // 去首尾空格
+str.slice(1, 5);      // 截取
+str.split(' ');       // 切数组
+str.includes('world'); // 是否包含
+str.indexOf('o');     // 查位置
+str.replace('world', 'js'); // 替换
+str.toUpperCase();    // 大写
+str.toLowerCase();    // 小写
+str.startsWith(' ');  // 是否以某字符开头
+str.endsWith(' ');    // 是否以某字符结尾
+
+// Map
+const map = new Map();
+map.set('a', 1);      // 设置
+map.get('a');         // 取值
+map.has('a');         // 是否存在
+map.delete('a');      // 删除
+map.size;             // 长度
+map.clear();          // 清空
+
+// Set
+const set = new Set([1, 2, 2, 3]);
+set.add(4);           // 添加
+set.has(2);           // 是否存在
+set.delete(2);        // 删除
+set.size;             // 长度
+set.clear();          // 清空
+[...new Set([1,2,2,3])]; // 数组去重
+
+// Number / Math
+Number('123');        // 转数字
+parseInt('12px');     // 转整数
+parseFloat('3.14');   // 转浮点数
+(3.14159).toFixed(2); // 保留小数
+Math.max(1, 5, 3);    // 最大值
+Math.min(1, 5, 3);    // 最小值
+Math.floor(3.9);      // 向下取整
+Math.ceil(3.1);       // 向上取整
+Math.round(3.5);      // 四舍五入
+Math.random();        // 随机数
+Math.abs(-10);        // 绝对值
+
+// JSON
+const json = JSON.stringify({ a: 1 }); // 对象转字符串
+JSON.parse(json);     // 字符串转对象
+
+// Promise
+Promise.resolve(1).then(v => v); // 成功
+Promise.reject('err').catch(e => e); // 失败
+Promise.all([p1, p2]); // 全成功才成功
+Promise.allSettled([p1, p2]); // 都结束
+Promise.race([p1, p2]); // 谁先结束用谁
+
+// 常用语法
+const obj2 = { a: { b: 1 } };
+obj2?.a?.b;           // 可选链，防止报错
+null ?? '默认值';      // 空值合并
+const arr2 = [...arr]; // 展开
+const obj3 = { ...obj, c: 3 }; // 对象展开
+const { a } = obj;    // 解构
+const [x, y] = arr;   // 数组解构
+
+```
+
+
 
 ### 7. 异步编程基础
 ```javascript
