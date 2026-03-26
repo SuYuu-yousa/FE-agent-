@@ -1,0 +1,1 @@
+# eslint、prettier、stylelint、commitlint、husky、lint-staged
