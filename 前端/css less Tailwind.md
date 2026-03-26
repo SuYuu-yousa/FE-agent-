@@ -27,9 +27,17 @@
 4. flex+ `justify-content: center`。`align-items: center`、
 5. 单行文本 `line-height = height`、`text-align: center`、
 
+## 伪类
 
+:hover :active :focus :visited :first-child :nth-child(n)
 
 ## position
+
+
+
+## 
+
+
 
 
 
@@ -41,3 +49,4 @@
 
 
 
+## 主题切换
