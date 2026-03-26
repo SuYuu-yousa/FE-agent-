@@ -3,22 +3,21 @@
 单仓库好处：
 
 1. **代码复用方便**
-
    - 组件库、工具包、公共配置直接共享
-
 2. **依赖管理统一**
-
    - 版本更一致，减少“这个项目能跑那个不能跑”
-
 3. **CI/CD 更容易统一**
-
    - 测试、构建、发布流程可以标准化
-
 4. **更适合大前端工程**
-
    - 主应用 + 组件库 + utils + eslint/config 一起维护
 
-   
+
+
+monorepo 的典型目录结构你要知道。比如：`apps/` 放多个业务应用、`packages/` 放公共包、`tooling/` 放构建脚本和配置包、根目录放统一的 `package.json`、workspace 配置、lint/test/build 配置。像：`apps/admin`、`apps/h5`、`packages/ui`、`packages/utils`、`packages/eslint-config`。这类结构在实际项目里非常常见。
+
+
+
+
 
 - **Lerna 的角色**：在这个"项目大家族"里，Lerna 就像是**物业经理**。它帮你处理各种公共事务，比如：
   - **初始化**所有包的依赖安装 (`lerna bootstrap`) 。
