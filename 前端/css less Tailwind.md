@@ -63,23 +63,15 @@ calc()`、`min()`、`max()`、`clamp()
 
 ## flex
 
-flex:1 等价于
+flex:1 等价于 1 1 0
 
 ```
-flex-grow: 1;
-flex-shrink: 1;
-flex-basis: 0%;
+flex-grow: 1;(侵占权重)
+flex-shrink: 1;（割让权重）
+flex-basis: 0%;（初始分配假设）
 ```
 
-含义（记核心就行）：
 
-- **占剩余空间**：按比例分配，多个人都 `flex:1` 就平分
-
-- **可以缩小**：空间不够会一起挤（`shrink:1`）
-
-- **起始宽度按 0 算**：更倾向“纯按比例分剩余空间”（`basis:0`）
-
-  
 
 ## grid
 
