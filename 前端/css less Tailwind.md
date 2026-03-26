@@ -13,37 +13,73 @@
 5. **元素/伪元素选择器**：`div`、`::before` → `0-0-0-1`
 6. **通配符/继承**：`*、>、+、~、空格` → `0-0-0-0`
 
-==多个选择器优先级相同怎么办，答“看后写的覆盖先写的”==，
+==多个选择器优先级相同怎么办，答“看后写的覆盖先写的”==
+
+
+
+
 
 ## 盒模型
 
-盒模型是重中之重。关键词：content、padding、border、margin、`box-sizing`。标准盒模型下，`width/height` 只算 content；IE 盒模型/现在通过 `box-sizing: border-box` 实现的效果是 `width/height` 包含 padding 和 border。现代项目几乎都会全局设 `box-sizing: border-box`、
+content、padding、border、margin、`box-sizing`。
+
+标准盒模型下，`width/height` 只算 content；
+
+怪异盒模型/现在通过 `box-sizing: border-box` 实现的效果是 `width/height` 包含 padding 和 border。
+
+
 
 ## 居中
 
 1. margin: auto
+
 2. position: absolute;left: 50%;top: 50%;transform: translate(-50%, -50%);
+
 3.  grid: `place-items: center`。
-4. flex+ `justify-content: center`。`align-items: center`、
-5. 单行文本 `line-height = height`、`text-align: center`、
+
+4. flex+ `justify-content: center`。`align-items: center`
+
+5. 单行文本 `line-height = height`、`text-align: center`
+
+   
 
 ## 伪类
 
 :hover :active :focus :visited :first-child :nth-child(n)
 
+
+
 ## position
 
 
 
-## 
+## 函数
 
-
+```
+calc()`、`min()`、`max()`、`clamp()
+```
 
 
 
 ## flex
 
+flex:1 等价于
 
+```
+flex-grow: 1;
+flex-shrink: 1;
+flex-basis: 0%;
+```
+
+含义（记核心就行）：
+
+- **占剩余空间**：按比例分配，多个人都 `flex:1` 就平分
+
+- **可以缩小**：空间不够会一起挤（`shrink:1`）
+
+- **起始宽度按 0 算**：更倾向“纯按比例分剩余空间”（`basis:0`）
+
+  
 
 ## grid
 
