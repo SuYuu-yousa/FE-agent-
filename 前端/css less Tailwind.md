@@ -1,3 +1,30 @@
 # css基础常考点
 
+## 选择器
+
 二、选择器一定会考。你要掌握：元素选择器、类选择器、id 选择器、后代、子代、相邻兄弟、通用兄弟、属性选择器、伪类、伪元素。高频示例：`div`、`.box`、`#app`、`ul li`、`ul > li`、`a + span`、`a ~ span`、`input[type="text"]`、`:hover`、`:focus`、`:nth-child(n)`、`::before`、`::after`。现在实际业务中类选择器最常见，id 选择器很少作为样式主方案。你还要知道 `:not()`、`:first-child`、`:last-child`、`:nth-of-type()` 这些也很常考。
+
+## 优先级
+
+三、选择器优先级是校招必考。记忆规则：`!important` 最高，但应谨慎使用；然后是行内样式；再是 id、类/属性/伪类、元素/伪元素。可以记成四元组思想，但面试时不用太数学化。比如：`#id` 大于 `.class`，`.class` 大于 `div`。`*` 通配符、继承样式优先级很低。常见追问：多个选择器优先级相同怎么办，答“看后写的覆盖先写的”，这就是层叠。再补一句：`:not()` 本身不增加权重，权重看里面的选择器。
+
+## 盒模型
+
+盒模型是重中之重。关键词：content、padding、border、margin、`box-sizing`。标准盒模型下，`width/height` 只算 content；IE 盒模型/现在通过 `box-sizing: border-box` 实现的效果是 `width/height` 包含 padding 和 border。现代项目几乎都会全局设 `box-sizing: border-box`、
+
+## 居中
+
+
+
+## position
+
+
+
+## flex
+
+
+
+## grid
+
+
+
