@@ -121,3 +121,47 @@ document.documentElement.dataset.theme = 'dark' // 或 'light'
 ```
 
 
+
+
+
+## 多行文本兼容
+
+文本溢出我们经常用到的应该就是 text-overflow: ellipsis 了，相信大家也很熟悉，只需轻松几行代码就可以实现单行文本截断。
+
+```css
+div {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+```
+
+
+
+
+
+```
+/* 多行截断 */
+.text {
+  overflow: hidden; /* 超出隐藏 */
+  display: -webkit-box; /* 变成弹性伸缩盒子，用于多行截断 */
+  -webkit-line-clamp: 2; /* 最多显示 2 行 */
+  -webkit-box-orient: vertical; /* 子元素垂直排列 */
+}
+
+/* 单行截断 */
+.text {
+  white-space: nowrap; /* 不换行 */
+  overflow: hidden; /* 超出隐藏 */
+  text-overflow: ellipsis; /* 超出显示 ... */
+}
+
+/* 英文长单词换行 */
+.text {
+  word-break: break-word; /* 单词太长时允许断开 */
+  overflow-wrap: anywhere; /* 内容太长时可在任意位置换行，防止撑爆 */
+}
+```
+
+
+
