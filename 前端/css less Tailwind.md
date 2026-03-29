@@ -83,3 +83,41 @@ flex-basis: 0%;（初始分配假设）
 ## 主题切换
 
 我会把颜色、字体、圆角、阴影、间距等抽成 design tokens，通过根节点挂主题标识或切换 data-theme/class，然后用 CSS变量驱动页面样式变化。
+
+核心就 3 个语法点：
+
+1. **`data-theme="dark"` 是自定义属性（HTML 属性）**
+
+```
+<html data-theme="dark">
+```
+
+只是给根元素打个“标记”，方便 CSS 选择它。
+
+2. **CSS 变量：`--xxx` 定义，`var(--xxx)` 使用**
+
+```
+:root { --color-bg: #fff; }      /* 定义变量（全局默认） */
+.box { background: var(--color-bg); }  /* 使用变量 */
+```
+
+3. **属性选择器：`[data-theme="dark"]`**  
+    意思是“选中带这个属性的元素”（这里是 html），在它下面变量会被覆盖：
+
+```
+[data-theme="dark"] { --color-bg: #111; }
+```
+
+所以流程是：
+
+- `:root` 先给一套默认变量（light）
+- 当 html 变成 `data-theme="dark"`，CSS 命中 `[data-theme="dark"]`，把变量值改掉
+- 组件都用 `var(--color-bg)`，不用改组件 CSS，只是变量换了
+
+JS 切换本质就一句：
+
+JavaScript
+
+```
+document.documentElement.dataset.theme = 'dark' // 或 'light'
+```
