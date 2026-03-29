@@ -114,10 +114,10 @@ flex-basis: 0%;（初始分配假设）
 - 当 html 变成 `data-theme="dark"`，CSS 命中 `[data-theme="dark"]`，把变量值改掉
 - 组件都用 `var(--color-bg)`，不用改组件 CSS，只是变量换了
 
-JS 切换本质就一句：
-
-JavaScript
+JS 切换就一句：
 
 ```
 document.documentElement.dataset.theme = 'dark' // 或 'light'
 ```
+
+
