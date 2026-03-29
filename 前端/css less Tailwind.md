@@ -66,7 +66,7 @@ calc()`、`min()`、`max()`、`clamp()
 
 ## flex
 
-flex:1 等价于 1 1 0
+flex:1 等价于 110
 
 ```
 flex-grow: 1;(侵占权重)
@@ -81,3 +81,5 @@ flex-basis: 0%;（初始分配假设）
 
 
 ## 主题切换
+
+我会把颜色、字体、圆角、阴影、间距等抽成 design tokens，通过根节点挂主题标识或切换 data-theme/class，然后用 CSS变量驱动页面样式变化。
