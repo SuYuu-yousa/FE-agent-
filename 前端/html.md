@@ -106,6 +106,8 @@ HTML
 
 ==CSP 是什么：内容安全策略，防止 XSS 攻击的重要手段==
 
+具体可以看安全相关.md
+
 ```
 <meta http-equiv="Content-Security-Policy" 
   content="default-src 'self'; script-src 'self' https://cdn.example.com; 
