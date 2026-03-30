@@ -122,11 +122,6 @@ const result = condition ? value1 : value2;
 for (let i = 0; i < 5; i++) { }
 while (condition) { }
 do { } while (condition);
-
-
-语法	遍历什么
-for...of	遍历 值
-for...in	遍历 键 / 下标 / 属性名
 ```
 
 ### 4. 函数
@@ -166,135 +161,14 @@ fruits.push("葡萄"); // 添加元素
 fruits.length;      // 数组长度
 ```
 
-### 6.常用api
+### 6. 数组常用方法
+```javascript
+const numbers = [1, 2, 3, 4, 5];
 
-```
-// ==================== Array ====================
-const arr = [1, 2, 3];
-arr.push(4);              // 尾部加一个元素，arr变成[1,2,3,4]
-arr.pop();                // 删掉最后一个元素，返回被删的值
-arr.unshift(0);           // 头部加一个元素
-arr.shift();              // 删掉第一个元素，返回被删的值
-arr.slice(1, 3);          // 截取下标1到3(前闭后开)，不改原数组，[1,2,3,4].slice(1,3) → [2,3]
-arr.splice(1, 1, 9);      // 从下标1开始，删1个，插入9。会改原数组。[1,2,3].splice(1,1,9) → arr变成[1,9,3]
-arr.map(x => x * 2);      // 对每个元素做操作，返回新数组。[1,2,3].map(x=>x*2) → [2,4,6]
-arr.filter(x => x > 1);   // 过滤出满足条件的元素，返回新数组。[1,2,3].filter(x=>x>1) → [2,3]
-arr.find(x => x === 2);   // 找第一个满足条件的元素，找不到返回undefined
-arr.findIndex(x => x === 2); // 找第一个满足条件的下标，找不到返回-1
-arr.includes(2);          // 数组是否包含某个值，返回true/false
-arr.indexOf(2);           // 找某个值第一次出现的下标，找不到返回-1
-arr.some(x => x > 2);     // 是否至少有一个元素满足条件，返回true/false
-arr.every(x => x > 0);    // 是否所有元素都满足条件，返回true/false
-arr.reduce((acc, cur) => acc + cur, 0); // 累加器，从初始值0开始，依次累加。[1,2,3] → 6
-arr.sort((a, b) => a - b); // 排序，a-b升序，b-a降序。会改原数组
-arr.join('-');             // 用分隔符把数组拼成字符串。[1,2,3].join('-') → '1-2-3'
-arr.flat();               // 拍平一层嵌套。[[1,2],[3]].flat() → [1,2,3]
-arr.concat([4, 5]);       // 合并数组，不改原数组。[1,2].concat([3,4]) → [1,2,3,4]
-arr.reverse();            // 反转数组，会改原数组
-
-// ==================== Object ====================
-const obj = { a: 1, b: 2 };
-Object.keys(obj);         // 拿所有key组成的数组 → ['a', 'b']
-Object.values(obj);       // 拿所有value组成的数组 → [1, 2]
-Object.entries(obj);      // 拿所有[key,value]对 → [['a',1], ['b',2]]
-Object.assign({}, obj, { c: 3 }); // 合并对象，返回新对象 → {a:1, b:2, c:3}
-obj.hasOwnProperty('a');  // 判断是否是自身属性(不含原型链上的)，返回true/false
-Object.freeze(obj);       // 冻结对象，不能增删改任何属性
-'a' in obj;               // 判断key是否存在(包括原型链)，返回true/false
-
-// ==================== String ====================
-const str = ' hello world ';
-str.length;               // 字符串长度(包括空格)
-str.trim();               // 去掉首尾空格 → 'hello world'
-str.slice(1, 5);          // 截取下标1到5(前闭后开) → 'hell'
-str.split(' ');           // 按空格切成数组 → ['', 'hello', 'world', '']
-str.includes('world');    // 是否包含某子串，返回true/false
-str.indexOf('o');         // 某字符第一次出现的位置，找不到返回-1
-str.replace('world', 'js');   // 替换第一个匹配的 → ' hello js '
-str.replaceAll(' ', '-');     // 替换所有匹配的
-str.toUpperCase();        // 全部转大写
-str.toLowerCase();        // 全部转小写
-str.startsWith(' ');      // 是否以某字符开头
-str.endsWith(' ');        // 是否以某字符结尾
-str.charAt(1);            // 取某个位置的字符
-str.repeat(2);            // 重复2次
-str.padStart(20, '*');    // 用*在前面填充到20位
-str.padEnd(20, '*');      // 用*在后面填充到20位
-
-// ==================== Map ====================
-// Map和普通对象的区别：key可以是任意类型(对象、数组、函数都行)，有序，有size
-const map = new Map();
-map.set('a', 1);          // 设置键值对
-map.set({ x: 1 }, 'obj'); // key可以是对象
-map.get('a');             // 根据key取值，没有返回undefined
-map.has('a');             // 是否存在某个key
-map.delete('a');          // 删除某个key
-map.size;                 // 键值对数量
-map.clear();              // 清空
-// 遍历：for (const [key, value] of map) {}
-
-// ==================== Set ====================
-// Set：不重复的值的集合
-const set = new Set([1, 2, 2, 3]); // 自动去重 → {1, 2, 3}
-set.add(4);               // 添加值，已存在则忽略
-set.has(2);               // 是否存在某值
-set.delete(2);            // 删除某值
-set.size;                 // 元素个数
-set.clear();              // 清空
-[...new Set([1,2,2,3])];  // 最常用：数组去重 → [1,2,3]
-// 遍历：for (const item of set) {}
-
-// ==================== Number / Math ====================
-Number('123');            // 字符串转数字 → 123，转不了返回NaN
-parseInt('12px');         // 从头解析整数 → 12，遇到非数字停止
-parseFloat('3.14abc');    // 从头解析浮点数 → 3.14
-(3.14159).toFixed(2);     // 保留2位小数，返回字符串 → '3.14'
-Number.isNaN(NaN);        // 判断是不是NaN → true
-Number.isInteger(3);      // 判断是不是整数 → true
-Math.max(1, 5, 3);        // 最大值 → 5
-Math.min(1, 5, 3);        // 最小值 → 1
-Math.floor(3.9);          // 向下取整 → 3
-Math.ceil(3.1);           // 向上取整 → 4
-Math.round(3.5);          // 四舍五入 → 4
-Math.random();            // 0到1之间的随机数(不含1)
-Math.abs(-10);            // 绝对值 → 10
-Math.pow(2, 3);           // 2的3次方 → 8
-
-// ==================== Date ====================
-const d = new Date();
-d.getFullYear();          // 年 → 2025
-d.getMonth();             // 月 → 0-11(注意0是1月!)
-d.getDate();              // 日 → 1-31
-d.getDay();               // 星期 → 0-6(0是周日)
-d.getHours();             // 时
-d.getMinutes();           // 分
-d.getSeconds();           // 秒
-d.getTime();              // 时间戳(毫秒)
-Date.now();               // 当前时间戳(毫秒)
-
-// ==================== JSON ====================
-const json = JSON.stringify({ a: 1 }); // 对象转JSON字符串 → '{"a":1}'
-JSON.parse(json);         // JSON字符串转对象 → { a: 1 }
-// 注意：JSON.stringify 会丢失 undefined、函数、Symbol 类型的值
-
-// ==================== Promise ====================
-Promise.resolve(1).then(v => v);  // 创建一个成功的Promise
-Promise.reject('err').catch(e => e); // 创建一个失败的Promise
-// Promise.all([p1, p2])    → 全部成功才成功，一个失败就整体失败
-// Promise.allSettled([p1, p2]) → 等全部结束，不管成功失败，返回每个结果
-// Promise.race([p1, p2])   → 谁先结束用谁的结果(不管成功失败)
-// Promise.any([p1, p2])    → 谁先成功用谁，全失败才失败
-
-// ==================== 常用语法糖 ====================
-const obj2 = { a: { b: 1 } };
-obj2?.a?.b;               // 可选链：如果中间某层是null/undefined不会报错，返回undefined
-null ?? '默认值';          // 空值合并：左边是null/undefined时用右边。和||的区别是：0和''不会被当成空
-const arr2 = [...arr];    // 展开运算符：浅拷贝数组
-const obj3 = { ...obj, c: 3 }; // 展开运算符：浅拷贝并合并对象
-const { a } = obj;        // 对象解构：从obj里取出a
-const [x, y] = arr;       // 数组解构：取前两个元素
-const { a: renamed } = obj; // 解构时重命名：把a取出来叫renamed
-const { a = 10 } = {};    // 解构时给默认值：如果没有a就用10
+numbers.map(x => x * 2);     // [2,4,6,8,10]
+numbers.filter(x => x > 2);  // [3,4,5]
+numbers.find(x => x > 3);    // 4,找出第一个符合条件的元素，找不到返回undefined
+numbers.includes(3);         // true
 ```
 
 ### 7. 异步编程基础
@@ -354,6 +228,7 @@ Promise：
 
 
 ## 异步专栏
+
 
 
 
