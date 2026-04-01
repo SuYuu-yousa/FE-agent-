@@ -488,6 +488,16 @@ https://github.com/ecomfe/tempad-dev#mcp-server
 
 晋级淘汰tag，变成列表项了
 
+行间插入，变定制项目来了
+
+pk信息改名字
+
+pk头像遮罩   
+
+榜单遮罩
+
+pk条
+
 
 
 ## 工程流辅助
