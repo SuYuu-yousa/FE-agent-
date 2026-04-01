@@ -482,7 +482,12 @@ https://github.com/ecomfe/tempad-dev#mcp-server
 
 
 
-需求： 520 榜单组件改造
+## 需求： 520 榜单组件改造
+
+捋一捋，要给榜单加这些东西：
+
+晋级淘汰tag，变成列表项了
+
 
 
 ## 工程流辅助
