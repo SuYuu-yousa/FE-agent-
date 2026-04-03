@@ -488,7 +488,7 @@ https://github.com/ecomfe/tempad-dev#mcp-server
 
 晋级淘汰tag，变成列表项了 完成
 
-行间插入，变定制项目来了 完成 
+行间插入，变定制项目来了 完成  自测完成
 
 pk信息改名字 完成  
 
