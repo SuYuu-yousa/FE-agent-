@@ -490,7 +490,7 @@ https://github.com/ecomfe/tempad-dev#mcp-server
 
 行间插入，变定制项目来了 完成 
 
-pk信息改名字 完成 
+pk信息改名字 完成  
 
 pk头像遮罩   没给设计稿
 
