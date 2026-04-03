@@ -490,16 +490,13 @@ https://github.com/ecomfe/tempad-dev#mcp-server
 
 行间插入，变定制项目来了 完成  自测完成
 
-pk信息改名字 完成  
+pk信息改名字 完成  自测完成
 
 pk头像遮罩   没给设计稿
 
-榜单遮罩  ![[Pasted image 20260401171535.png]]
+榜单遮罩  对下接口 ，从promotion之后的加遮罩，按行加就行。设置成定制化吧
 
-对下接口 ，从promotion之后的加遮罩，按行加就行。设置成定制化吧
-
-
-pk条. 完成
+pk条. 完成 自测完成
 
 
 自测
