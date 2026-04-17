@@ -512,3 +512,173 @@ pk条. 完成 自测完成
   
 
 ## agent?mcp?
+
+# 520 活动组件开发 问题总结文档
+
+# 需求梳理：
+
+520活动需要用到三个现有组件，其中前两个使用场景较多
+
+猫耳通用榜单(新榜单组件)：
+
+[https://git.bilibili.co/maoer-frontend/maoer-plat-components/missevan-ranklist](https://git.bilibili.co/maoer-frontend/maoer-plat-components/missevan-ranklist)
+
+猫耳小窗组件：
+
+[https://git.bilibili.co/maoer-frontend/maoer-plat-components/missevan-windowpane](https://git.bilibili.co/maoer-frontend/maoer-plat-components/missevan-windowpane)
+
+猫耳直播榜单(原有榜单组件)：（这次需求只用在决赛-擂主榜）
+
+[https://git.bilibili.co/maoer-frontend/maoer-plat-components/missevan-live-rank-list](https://git.bilibili.co/maoer-frontend/maoer-plat-components/missevan-live-rank-list)
+
+Eva平台组件的使用逻辑是：
+
+开发人员本地开发完组件后上传平台。参考：[Eva 组件开发指南](https://doc.weixin.qq.com/doc/w3_ACcAjwb0ADg11DeaxlgT4uRJDwXJw?scode=ANYAEAdoABEiXX7gbNACcAjwb0ADg)
+
+运营在平台编辑页面中，以拖拽等方式配置组件参数和布局，形成页面。
+
+运营将页面发布上线后，页面上的组件根据接口数据展示不同的页面内容。
+
+### 数据展示流程（以榜单为例）
+
+同一类组件的不同实例展示不同数据，“最终”是通过运营配置的key实现的，以榜单组件举例，对于不同榜单
+
+![](https://wdcdn.qpic.cn/MTY4ODg1NTg5MTgyNTYxMA_627782_gLUNMwhBxrTvtTM3_1776068075?w=308&h=204&type=image/png)
+
+运营配置： 业务类型（区分请求的接口）｜ 活动ID=1668, 榜单key="18"（区分query参数） 如上图
+
+↓
+
+上线后，榜单组件实际会请求：/api/v2/activity/pk/list?event_id=1668&key=18
+
+↓
+
+后端根据 event_id + key 返回对应的榜单数据。
+
+但在配置过程中，由于没有实际的接口返回数据，运营一般会通过上传 JSON 文件或者复制类似活动的配置json，来模拟数据预览效果。
+
+对于榜单组件，上传的方式有两种：
+
+第一种是：载入配置（右上角）
+
+eva平台控制，可包含所有此组件配置内容，下文称为配置json![](https://wdcdn.qpic.cn/MTY4ODg1NTg5MTgyNTYxMA_259825__eaAZTn8blMJP9Z8_1776067899?w=1459&h=536&type=image/png)
+
+第二种是：json数据（右下角）
+
+"JSON 数据" 上传后组件用它替代接口请求作为数据源，下文称为数据json
+
+![](https://wdcdn.qpic.cn/MTY4ODg1NTg5MTgyNTYxMA_803161_8jBFUjRJegNlnac1_1776067914?w=1259&h=581&type=image/png)
+
+第一个json可以包含此组件的所有配置项（所有组件都有的），第二个json仅包含数据（榜单组件的配置项）
+
+ps: 所以其实对于榜单组件，他的配置数据结构是这样的
+
+![](https://wdcdn.qpic.cn/MTY4ODg1NTg5MTgyNTYxMA_643994_XcqA9mO6AejpsVrg_1776070420?w=406&h=423&type=image/png)
+
+# 问题梳理汇总：
+
+在开发过程/运营配置过程中发现的问题汇总：[520前端组建问题合集](https://doc.weixin.qq.com/sheet/e3_AXEAHgbuABwCN9rvhtOt0RFaAIFmr?scode=ANYAEAdoABECikRwocAcoAUwaCAGc&tab=BB08J2)
+
+大致可以分成四类：
+
+### 1.  新开发功能的bug，开发自测不充分导致
+
+比如：分组赛晋级/淘汰无法改圆角、头像添加胜负遮罩没有平局情况。
+
+这里晋级tag和胜负遮罩都是此次新需求，是自测不充分导致的提出bug
+
+自测手段: 参考 [Eva 组件开发指南](https://doc.weixin.qq.com/doc/w3_ACcAjwb0ADg11DeaxlgT4uRJDwXJw?scode=ANYAEAdoABEiXX7gbNACcAjwb0ADg) &[登录 - 猫耳FM-INFO](https://info.missevan.com/pages/viewpage.action?pageId=118071207)
+
+大概是本地npm run:eva，浏览器开：[https://ff-dev.bilibili.com/?_port_=2000](https://ff-dev.bilibili.com/?_port_=2000) 或 [https://ff-dev.bilibili.co/?_port_=2000](https://ff-dev.bilibili.co/?_port_=2000) ,拖本地组件进来
+
+复制一个线上活动平台的json,载入,查看效果
+
+![](https://wdcdn.qpic.cn/MTY4ODg1NTg5MTgyNTYxMA_878656_jQaLy3iMsCD75jal_1776073292?w=1919&h=762&type=image/png)
+
+所以其实这里就可以发现一些下文的第2类问题，因为自测过程我们如果也复制线上的json，是可以知道运营复制的json会有哪些字段是"缺失"的，运营和你复制的json应该差不多
+
+### 2.  配置过程中因为数据字段缺失/不对应，运营看不到预览
+
+比如：
+
+![](https://wdcdn.qpic.cn/MTY4ODg1NTg5MTgyNTYxMA_171417_N_mcVjxZ9DUGENec_1776068409?w=239&h=73&type=image/png)
+
+承接1的问题，运营通常会反馈：新配置勾选了，但是看不到预览效果，这通常是因为上传的json缺失了相关字段导致的
+
+和代码无关，解决办法就是发给运营带新字段的mock数据，然后看到预览效果
+
+但是这里有一个风险：新提供的json(包含新字段)，必须能保证和实际上线的后端接口字段一致，我们只是在根据这个json看预览，并不是上线后从接口拿数据的效果。
+
+还有一种是运营复制错了json，比如用积分榜单的json复制进了pk榜单，这样也会看不到展示，交付新版本组件的同时提供json/提醒运营用正确的就好
+
+### 3.  配置中发现的，现有组件的功能不满足需求（包括历史bug）
+
+不满足需求的例子：定制行布局，PK榜单需要补充实现，现在和背景图对不齐
+
+历史bug的例子：这里切成出PK结果后没图了
+
+不满足需求的情况。
+
+简单来说，这部分的难点在，需要在评估开发项的时候，就对相关组件能力和需求有非常完善的了解，才能比较全的给出这次要在原有组件上补充什么，否则就只能在配置时发现没这个功能，还挺难的。
+
+历史Bug也类似，原有功能问题也大概只能在配置过程中暴露出来
+
+总之这类bug只能大多数出现在配置的过程中，只能预先多留点buffer。
+
+### 4.  配置使用问题，一般是需求中的某些部分和配置之间的联系不直接（不知道该配哪个或者怎么配）
+
+比如：
+
+![](https://wdcdn.qpic.cn/MTY4ODg1NTg5MTgyNTYxMA_633405_7jzDzlASqJEfaYz5_1776068525?w=197&h=51&type=image/png)
+
+：小窗其实没有key,会随着赛程阶段自动切换
+
+运营对某些配置项有疑问导致的问题，可以通过给运营写配置文档提前避免一部分[小窗组件使用文档](https://doc.weixin.qq.com/doc/w3_AVgA4QayALACNOUdoRlmtRq2bI3KT?scode=ANYAEAdoABEiYw37PkAcoAUwaCAGc)
+
+# 总结&可能的提效手段：
+
+### 1.  数据问题
+
+文中提到，我们在自测的时候，自己导入数据时，是可以发现配置过程中 "因数据字段缺失，运营看不到预览" 这类问题的
+
+所以可以提前同步给运营让他用新数据，或者直接把自己测试用的数据提供给运营，从而直接避免第二类问题的出现
+
+### 2.平台不能接后端吗？这样不就省了数据配置项，也规避了风险吗
+
+能，是可以的，配置时清空 JSON 数据字段，预览时会直接请求后端接口。
+
+参考[登录 - 猫耳FM-INFO](https://info.missevan.com/pages/viewpage.action?pageId=118071207) 中这部分，配置好相关的query，我们开发过程中也可以在自测阶段自己建立测试页预览：
+
+![](https://wdcdn.qpic.cn/MTY4ODg1NTg5MTgyNTYxMA_313049_9xj05I8tWYLDrLe5_1776080007?w=902&h=156&type=image/png)
+
+但是有时候并不是后端接口先在uat上线，像这次就是这种情况，所以过程中就会新增数据问题。
+
+不太清楚业务流程，但是能确定的一点是在能走接口的时候一定要通过接口预览而不是复制配置json，安全也快捷
+
+### 3.  mcp
+
+目前配置的流程是运营通过figma的视觉图，用组件以低代码的方式在eva平台构建页面，本质上形成的是那个配置json，这个配置能不能生成一下
+
+figma 官方mcp配置（以claudecode为例）：
+
+方式一：插件安装
+
+claude plugin install figma@claude-plugins-official
+
+装完后按提示走 Figma 登录就行，自动配好。
+
+方式二： MCP Server （推荐）
+
+claude mcp add --scope user --transport http figma https://mcp.figma.com/mcp
+
+跑完重启下claude，重新进claude 输入/mcp 也是认证完就行
+
+然后就可以在对话里给cc粘贴figma链接了
+
+比如： 帮我把这个设计实现成代码：https://figma.com/design/xxxxx/MyFile?node-id=1-2
+
+### 4.
+
+![](https://wdcdn.qpic.cn/MTY4ODg1NTg5MTgyNTYxMA_218226_RF5Wlwtc9OUmp14d_1776079766?w=355&h=120&type=image/png)
+
+还在理解，指的是不走配置平台，通过figma skills 直接生成前端代码，类似于直接把配置过程省去？
