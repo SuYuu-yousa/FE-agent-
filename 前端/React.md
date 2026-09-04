@@ -205,3 +205,31 @@
 
 ---
 
+# 9. React 19 新特性（2024-2026，必会最新）
+
+## Actions 与表单 ⭐
+
+### useActionState
+`const [state, action, isPending] = useActionState(fn, init)`；一个 hook 管理表单提交状态（错误信息/loading/提交动作），替代手动维护多个 state。
+
+### useFormStatus
+在 form 的**子组件**里读父 form 提交状态（pending/data），让按钮自动禁用 + loading，省掉 prop drilling。
+
+### <form action>
+React 19 里 <form action={fn}> 是一等公民，配合上面两个 hook 处理表单。
+
+## useOptimistic（乐观更新）⭐
+`const [opt, add] = useOptimistic(state, fn)`；先立即显示预期结果、请求失败**自动回滚**。例：点赞/加购物车先显示成功，失败自动撤回，省去手写「快照 + 回滚」样板。
+
+## use() 读取 Promise / Context
+渲染时直接读 Promise（配合 Suspense）或 Context；可写在条件/循环里；替代 useEffect + useState 的「state soup」。
+
+## ref 作为普通 prop
+React 19 的 ref 可直接作为 prop 传给子组件，不再需要 forwardRef（forwardRef 已废弃）。
+
+## React Compiler（2025 自动记忆化）
+构建时自动 memo，手写 useMemo/useCallback/React.memo 大多可省。
+
+## 移除项（面试别踩）
+string refs、legacy context、函数组件 propTypes/defaultProps、ReactDOM.render 已移除，用 createRoot。
+

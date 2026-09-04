@@ -1,88 +1,43 @@
-# 包管理器
+# 包管理器（npm / yarn / pnpm）
 
-Pnpm install做了什么
+> 目标：面试常问「npm/yarn/pnpm 区别」「pnpm 原理」「lock 文件」「semver」。下面已填好答案，可照着背 + 用自己的话复述。
 
-比如说
+## 一、npm / yarn / pnpm 区别 ⭐
 
-Progress: resolved 1256, reused 1163, downloaded 0, added 0
+### 安装速度与磁盘
+npm 用扁平 node_modules，易产生依赖冲突和「幽灵依赖」；yarn 更快、锁文件更早出现；pnpm 用硬链接指向全局 store，同版本包只存一份、最省磁盘。
 
-所以 node_modules 是给 Node.js 用的查找路径，不是真正存储包的地方。
+### 一句话
+现在新项目基本用 pnpm（快 + 省盘），npm 保底，yarn 逐渐少用。
 
-```Plain
-pnpm install
-    ↓
-1. 读取 package.json + .npmrc
-    ↓
-2. 解析依赖树（resolved 1259）
-    ↓
-3. 检查全局缓存（reused 1123）
-    ↓
-4. 下载缺失的包（downloaded 136）
-    ↓ 保存到 ~/Library/pnpm/store/v3
-    ↓
-5. 创建 node_modules 结构（added 1163）
-    ├─ 硬链接到全局缓存
-    └─ 符号链接到虚拟存储
-    ↓
-6. 运行 postinstall 脚本
-    ↓
-7. 生成 pnpm-lock.yaml
-    ↓
-✅ Done
-```
+## 二、pnpm 原理 ⭐
 
-`.npmrc` 是 npm/pnpm/yarn 的配置文件，用来设置包管理器的行为。
+### 硬链接 / 符号链接
+所有包实际存在全局 store（`~/.pnpm-store`），项目 node_modules 用硬链接/软链指向它，同一版本只存一份，所以装得飞快。
 
-以下面这个为例
+### pnpm install 做了什么
+读 package.json + .npmrc → 解析依赖树（resolved）→ 查全局缓存（reused）→ 下载缺失（downloaded）→ 建 node_modules（硬链/软链）→ 跑 postinstall → 生成 pnpm-lock.yaml。
 
-```Plain
-registry=http://registry.npm.bilibili.co
-phantomjs_cdnurl=http://cnpmjs.org/downloads
-sass_binary_site=https://npm.taobao.org/mirrors/node-sass/
-@bilibili:registry=http://registry.npm.bilibili.co
-@jinkela:registry=http://registry.npm.bilibili.co
-@plat-components:registry=http://registry.npm.bilibili.co
-side-effects-cache=false
-```
+### 幽灵依赖
+npm 扁平化导致你能 require 到没直接声明的包（A 依赖 B，你也能 require B）；pnpm 严格目录结构，只能用你声明过的依赖，避免「没装却能用」的坑。
 
-设置特定 scope（命名空间）的包从哪里下载
+## 三、lock 文件
 
-例如 @bilibili/xxx 这样的包会从 B 站内部源下载
+### 作用
+锁定精确版本，保证团队/CI 装出来完全一致。三个：package-lock.json / yarn.lock / pnpm-lock.yaml，必须提交到 git。
 
-3. phantomjs_cdnurl / sass_binary_site
+## 四、semver 版本号
 
-设置二进制文件的下载镜像地址
+### ^ 和 ~
+`^1.2.3` = 1.x.x（允许更新次版本和补丁）；`~1.2.3` = 1.2.x（只更新补丁）。主版本为 0 时（0.x）规则更保守。
 
-因为某些包（如 phantomjs、node-sass）需要下载编译好的二进制文件
+## 五、npm ci vs npm install
+`npm ci` 严格按 lock 装、先删 node_modules、更快、用于 CI 保证一致；`install` 会更新 lock、用于日常开发加依赖。
 
-4. side-effects-cache=false
+## 六、dependencies 分类
 
-禁用副作用缓存，确保每次安装都执行完整的安装脚本
+### dependencies / devDependencies / peerDependencies
+dependencies 运行时依赖（react）；devDependencies 开发依赖（vite、eslint）；peerDependencies 宿主依赖（某 react 插件声明「需要 react 17+」，由使用方提供）。
 
-
-
-## Npm ci:
-
-
-
-# package.json
-
-我一般理解package.json是一个包管理记录表
-
-但其实
-
-
-
-# 八股问题
-
-
-
-js事件流
-
-
-
-## 好用插件
-
-Vscode Gitlens可以看某一行是谁什么时候在哪个commit提交的
-
-浏览器的mod header可以修改 HTTP 请求头和响应头，比如添加自定义 Authorization、修改 User-Agent、调试 CORS、切换 Cookie 等，支持按 URL 过滤，方便测试不同环境 浏览器的zeroomega可以快速管理和切换多个代理配置，支持手动切换、按域名自动匹配规则、PAC 脚本分流，适合开发测试、跨境协作等场景 。
+## 七、.npmrc
+换源（registry）、scope 私有源（`@公司:registry`）、二进制镜像（sass/phantomjs）、side-effects-cache 等配置。

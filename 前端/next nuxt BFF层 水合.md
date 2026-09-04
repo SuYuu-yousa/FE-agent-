@@ -233,4 +233,100 @@ export default function Page() {
 
 
 
-# 
+---
+
+## 周五补 · BFF / 水合 / RSC / Next 15-16 / 结合 Agent
+
+### 1. BFF 层是什么 ⭐（面试必考）
+
+- BFF = Backend For Frontend（为前端定制的后端/中间层）。
+- 前端不直接调一堆微服务 / LLM，而是调 BFF，BFF 负责：聚合多个接口、裁剪字段、鉴权、缓存、流式转发。
+- ==一句话：BFF 是「给前端量身定做」的那一层后端，前端要什么它给什么，而不是让前端自己拼一堆接口==
+- 为什么出现：① 移动端/网页端要的数据形状不同；② 微服务/LLM 接口不适合直接暴露给前端；③ 鉴权、限流、日志要集中处理。
+- 结合 Agent：==AI 应用里 BFF 就是那个「转发 LLM + 拼 prompt + 流式返回」的 Node/Next 中间层==，API key 藏在这里不外泄。
+
+### 2. 水合 hydration 是什么 ⭐
+
+- SSR 服务器先出 HTML（有内容没交互），浏览器下载 JS 后，把事件绑定「挂」到已有 DOM 上，让页面「活」起来，这个过程叫水合。
+- ==水合 = 服务器渲染好的 HTML 上，再「通电」绑定事件，让静态页面变可交互==
+- 水合不匹配（hydration mismatch）：服务器和浏览器渲染结果不一致（如用了 `Date.now()`、`Math.random()`、`window` 等），React 报错或警告。
+- 处理：把不确定值放 `useEffect`（只在客户端跑）或 `suppressHydrationWarning`，或保证首屏两端输出一致。
+
+### 3. RSC：Server / Client Component 边界 ⭐
+
+- RSC（React Server Components）= 默认在**服务器**渲染的组件，产物**不发送 JS**给浏览器，能直接 await 数据库/接口。
+- Client Component = 加 `'use client'`，在浏览器跑，用 state/effect/事件/浏览器 API。
+- 边界划分：==能纯输出的（读数据、SEO、静态展示）放 Server；要交互的（表单、弹窗、图表、状态）才加 'use client'==
+- `'use client'` 代价：组件及其依赖会进客户端 JS 包，增大体积；别乱加，否则退化成普通 CSR。
+
+### 4. Next 15 / 16 新特性（2024–2026，加分项）
+
+- Next 15：React 19；`cookies()/headers()/params` 变成 **async 要 await**；**fetch 默认不再缓存**（和 13/14 相反，以前默认 force-cache）；Turbopack dev 稳定。
+- Next 16（2025.10）：**Cache Components**——用 `"use cache"` 指令显式标记可缓存组件/函数，配 `cacheLife()`（时长）、`cacheTag()`/`revalidateTag()`（失效）；Turbopack 默认打包；React Compiler 内置；`proxy.ts` 取代 middleware 做网络边界。
+- ==记忆点：v13/14 默认缓存 → v15 默认不缓存 → v16 用 "use cache" 显式缓存==
+
+### 5. 结合 Agent：Route Handler + AI SDK 流式 ⭐
+
+- Next 的 `app/api/chat/route.ts` 就是天然的 BFF + 流式后端。
+- 服务端用 `streamText` 调 LLM，客户端用 `useChat` 接流：
+
+```ts
+// app/api/chat/route.ts（BFF 层）
+import { streamText, convertToModelMessages } from "ai";
+
+export async function POST(req: Request) {
+  const { messages } = await req.json();
+  const result = streamText({
+    model: "anthropic/claude-sonnet-4-6",
+    messages: convertToModelMessages(messages),
+    abortSignal: req.signal, // 关标签页就取消，省 token
+  });
+  return result.toUIMessageStreamResponse(); // 包装成 SSE 流返回
+}
+```
+
+```tsx
+// 客户端
+"use client";
+import { useChat } from "@ai-sdk/react";
+
+export function Chat() {
+  const { messages, sendMessage, stop, status } = useChat();
+  // messages 里逐 token 增长，status === 'streaming' 表示还在生成
+}
+```
+
+- ==为什么聊天不用 EventSource？== 因为 EventSource 只支持 GET、不能带请求体，而聊天要 POST 历史消息；所以用 `fetch` POST + 手动解析 SSE（`ReadableStream` + `TextDecoderStream`）。
+- Data Stream Protocol：SSE 格式，每行 `data:` + JSON，`type` 区分帧——`text-delta`（文本增量）、`reasoning-*`（思考）、`tool-*`（工具调用）、`start-step/finish-step`（多步循环）、`finish`（结束）。
+- 生产坑：中间层缓冲会破坏流式（nginx 要关 `proxy_buffering`、加 `X-Accel-Buffering: no`、`Cache-Control: no-transform`）；别在路由里 `await result.text`（会缓冲整个响应）。
+
+---
+
+## 首屏优化：SPA vs SSR/SSG + History API 跳转
+
+### 首屏 HTML 怎么来
+
+| 渲染方式 | 首屏 HTML 怎么来 | 首屏 | SEO |
+| --- | --- | --- | --- |
+| 纯 SPA (CSR) | 空 HTML + JS 渲染 | 慢（要等 JS） | 弱 |
+| SSR / SSG | 服务器先渲染好 HTML | 快（直接显示） | 好 |
+
+==首屏优化核心：让第一屏的 HTML 尽早有内容——SSR/SSG 服务器先渲染好，纯 SPA 是空壳等 JS。==
+
+### History API 跳转 vs 真跳转
+
+判断标准：==目标地址还在不在自己这个应用里==。
+
+| 场景 | 写法 | 刷新吗 |
+| --- | --- | --- |
+| 应用内导航 | `navigate` / `<Link>`（History API） | 不刷新 |
+| 首屏 / F5 / 直接输 URL | — | 真请求 |
+| 跳别的网站 / 系统 | `window.location.href` / `<a>` | 真刷新 |
+
+==应用内导航（SPA 和 Next.js 一样）都用 History API 不刷新；首屏、刷新、跳外站才是真请求。==
+
+### Next.js = 首屏 SSR + 之后 History API 导航（混合）
+
+==首屏 SSR/SSG（服务器渲染好 HTML）→ 进来后应用内切页走 History API（不刷新，数据异步 fetch）。==
+
+==一句话：History API 负责「进来之后应用内切页」，SSR/SSG 负责「第一次进来首屏有内容」，两者不冲突。==
