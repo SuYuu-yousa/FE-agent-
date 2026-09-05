@@ -279,7 +279,7 @@ POST: 参数在body / 不可缓存 / 非幂等 / 回退会重新提交
 现代大厂基本不靠后端实时计算，而是用文件名哈希（指纹） + CDN + 强缓存。
 
 · 构建时，vite或者webpack会给文件打上Hash名，分两处，一个是把js文件名自动带hash（如 app.a1b2c3.js）同时找到index.html，把原来的 
-<[[script]] src="app.js"> 替换成 /</88script src="app.a1b2c3.js">。
+<[[script]] src="app.js"> 替换成 /</88”script src="app.a1b2c3.js">。
 
 · 请求时
 · 第1次访问：浏览器请求 app.a1b2.js → 去CDN拿（很快）→ 存本地 + 缓存有效期设1年。
