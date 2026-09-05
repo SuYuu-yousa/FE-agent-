@@ -259,7 +259,7 @@ POST: 参数在body / 不可缓存 / 非幂等 / 回退会重新提交
 
 ### 强缓存（不发请求）
 - `Expires`（绝对时间，已过时）/ `Cache-Control: max-age=秒`（相对时间，主流）。
-- 命中 → 直接从 memory/disk cache 拿，**不发请求**，状态码仍是 200（from memory/disk cache）。
+- 命中 → 直接从 memory（浏览器孕运存/disk cache（电脑磁盘 拿，**不发请求**，状态码仍是 200（from memory/disk cache）。
 - `no-store` 完全不缓存；`no-cache` 缓存但要先验证（走协商）。
 
 ### 协商缓存（发请求，但可能不带 body）
